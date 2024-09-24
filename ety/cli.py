@@ -3,7 +3,7 @@
 from __future__ import print_function
 
 import argparse
-
+import sys
 import ety
 
 
@@ -39,6 +39,8 @@ def cli():
             output += "\n\n%s\n \u2022 " % source_word
             output += "\n \u2022 ".join(root.pretty for root in roots)
 
-    print(output.strip())
+    encoded_output = output.strip().encode("utf-16", errors="replace")
+    sys.stdout.buffer.write(encoded_output)
+    sys.stdout.buffer.flush()
 
     return 0
